@@ -3,9 +3,9 @@ package com.learning.datawarehouse.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learning.datawarehouse.model.ArticleEntity;
 import com.learning.datawarehouse.model.InventoryEntity;
-import com.learning.datawarehouse.model.ProductEntity;
 import com.learning.datawarehouse.repositories.InventoryRepository;
 import com.learning.datawarehouse.upload.*;
+import com.learning.datawarehouse.util.InventoryMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,7 +36,7 @@ public class InventoryService extends GenericService{
     }
 
     private void throwErrIfArtNotAvail(Optional<InventoryEntity> inventoryEntityToUpdate, String reason) {
-        if (inventoryEntityToUpdate.isPresent())
+        if (!inventoryEntityToUpdate.isPresent())
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, reason);
     }
@@ -49,7 +49,7 @@ public class InventoryService extends GenericService{
         return inventoryRepository.saveAndFlush(inventoryEntityToUpdate.get());
     }
 
-    public boolean areArtOfProdInStock(Set<ArticleEntity> articles) {
+    public boolean areArtOfProdInStock(List<ArticleEntity> articles) {
         for(ArticleEntity articleEntity :articles){
             Optional<InventoryEntity> inventoryEntityToUpdate =inventoryRepository.findById(articleEntity.getArtId());
             throwErrIfArtNotAvail(inventoryEntityToUpdate, "Article id present in product is not available in the inventory");
@@ -60,7 +60,7 @@ public class InventoryService extends GenericService{
     }
 
     //Reduce inventory only after ensuring all articles of a product are in stock.
-    public void reduceInventory(Set<ArticleEntity> articleEntities) {
+    public void reduceInventory(List<ArticleEntity> articleEntities) {
         for(ArticleEntity articleEntity : articleEntities) {
             InventoryEntity inventoryEntityToUpdate = inventoryRepository.findById(articleEntity.getArtId()).get();
             //Update balance stock of article in Inventory

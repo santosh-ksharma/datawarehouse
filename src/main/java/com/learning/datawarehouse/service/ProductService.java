@@ -6,17 +6,15 @@ import com.learning.datawarehouse.model.ProductEntity;
 import com.learning.datawarehouse.repositories.ArticleRepository;
 import com.learning.datawarehouse.repositories.ProductRepository;
 import com.learning.datawarehouse.upload.ProductInfo;
-import com.learning.datawarehouse.upload.ProductMapper;
+import com.learning.datawarehouse.util.ProductMapper;
 import com.learning.datawarehouse.upload.Products;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -54,7 +52,7 @@ public class ProductService extends GenericService {
         Optional<ProductEntity> productItem=productRepository.findByProductId(productId);
         throwErrIfProdNotFound(productItem);
         ProductEntity productEntity =productItem.get();
-        Set<ArticleEntity> articleEntities = productEntity.getArticleEntities();
+        List<ArticleEntity> articleEntities = productEntity.getArticleEntities();
         //Ensure each article of product is in stock and only then sell/remove the product
         if(inventoryService.areArtOfProdInStock(articleEntities)){
             inventoryService.reduceInventory(articleEntities);
@@ -78,15 +76,13 @@ public class ProductService extends GenericService {
         File myFile = getFile(file);
         Products productInfos = mapFileToBean(myFile);
         for(ProductInfo productInfo: productInfos.getProducts()){
-            ProductEntity prodEntity= ProductMapper.INSTANCE.toProductModel(productInfo);
+            ProductEntity prodEntity= ProductMapper.toProductEntity(productInfo);
             save(prodEntity);
         }
     }
 
     public void save(ProductEntity productEntity){
         productRepository.save(productEntity);
-        System.out.println(productEntity.getArticleEntities().size());
-
     }
 
 }

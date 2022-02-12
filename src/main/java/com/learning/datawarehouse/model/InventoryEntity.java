@@ -23,29 +23,5 @@ public class InventoryEntity {
     private String artName;
 
     private int stock;
-
-    public int getArtId() {
-        return artId;
-    }
-
-    public void setArtId(int artId) {
-        this.artId = artId;
-    }
-
-    public String getArtName() {
-        return artName;
-    }
-
-    public void setArtName(String artName) {
-        this.artName = artName;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
 }
 

@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -23,5 +23,5 @@ public class ProductEntity implements Serializable {
     private String productName;
 
     @OneToMany(mappedBy = "productEntity",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Set<ArticleEntity> articleEntities;
+    private List<ArticleEntity> articleEntities;
 }

@@ -13,7 +13,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductInfo implements Serializable {
+    private Integer productId;
     private String name;
+    //Keeping the same name as mentioned in product file for automatic json to bean mapping
     private List<ArticleInfo> contain_articles;
 
 }

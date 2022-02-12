@@ -3,6 +3,9 @@ package com.learning.datawarehouse.controllers;
 import com.learning.datawarehouse.model.ProductEntity;
 import com.learning.datawarehouse.service.ProductService;
 
+import com.learning.datawarehouse.upload.ProductInfo;
+import com.learning.datawarehouse.util.InventoryMapper;
+import com.learning.datawarehouse.util.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
@@ -14,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -23,8 +27,9 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public List<ProductEntity> fetch() {
-        return productService.fetchAllProducts();
+    public List<ProductInfo> fetch() {
+        //return productService.fetchAllProducts();
+        return productService.fetchAllProducts().stream().map(productEntity -> ProductMapper.toProductDTO(productEntity)).collect(Collectors.toList());
     }
 
     @GetMapping(value = "{id}")
