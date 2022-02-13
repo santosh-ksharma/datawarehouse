@@ -1,12 +1,16 @@
 package com.learning.datawarehouse.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.learning.datawarehouse.exception.FileIncorrectFormatException;
+import com.learning.datawarehouse.exception.InventoryNotFoundException;
+import com.learning.datawarehouse.exception.OutOfStockException;
 import com.learning.datawarehouse.model.ArticleEntity;
 import com.learning.datawarehouse.model.InventoryEntity;
 import com.learning.datawarehouse.repositories.InventoryRepository;
 import com.learning.datawarehouse.dto.*;
 import com.learning.datawarehouse.util.InventoryMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +23,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class InventoryService extends GenericService {
@@ -43,8 +48,7 @@ public class InventoryService extends GenericService {
 
     private void throwErrIfInventoryNotFound(Optional<InventoryEntity> inventoryEntity) {
         if (!inventoryEntity.isPresent())
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Inventory id not found");
+            throw new InventoryNotFoundException("Inventory id not found","1002");
     }
 
     //Provision to update inventory name and stock for a given inventory id.
@@ -61,7 +65,7 @@ public class InventoryService extends GenericService {
             Optional<InventoryEntity> inventoryEntityToUpdate = inventoryRepository.findById(articleEntity.getArtId());
             throwErrIfArtNotAvail(inventoryEntityToUpdate, "Article id present in product is not available in the inventory");
             if (inventoryEntityToUpdate.get().getStock() - articleEntity.getAmountOf() < 0)
-                return false;
+                throw new OutOfStockException("One of the articles is not having sufficient stock","1005");
         }
         return true;
     }
@@ -77,9 +81,14 @@ public class InventoryService extends GenericService {
 
     }
 
-    private Inventories mapFileToBean(File inventoryInputFile) throws IOException {
+    private Inventories mapFileToBean(File inventoryInputFile) {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(inventoryInputFile, Inventories.class);
+        try {
+            return mapper.readValue(inventoryInputFile, Inventories.class);
+        } catch (IOException e) {
+            log.error("InventoryService:mapFileToBean:1003",e);
+            throw new FileIncorrectFormatException("Wrong file format uploaded","1003");
+        }
     }
 
     public void saveUploadedFile(MultipartFile file) throws IOException {

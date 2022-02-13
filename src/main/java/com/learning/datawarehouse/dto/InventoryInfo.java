@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -16,10 +15,10 @@ public class InventoryInfo {
 
     //Property names kept in sync with property name in file for automatic transformation from json da
     private Integer art_id;
-    @NotNull
+    @NotEmpty
     private String name;
 
-    @NotNull
+    @NotEmpty
     private String stock;
 
     public Integer getArt_id() {

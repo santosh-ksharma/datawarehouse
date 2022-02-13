@@ -6,6 +6,7 @@ import com.learning.datawarehouse.service.InventoryService;
 import com.learning.datawarehouse.dto.InventoryInfo;
 import com.learning.datawarehouse.util.InventoryMapper;
 import com.learning.datawarehouse.util.ProductMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,11 +22,11 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/inventories")
 public class InventoryController {
 
-    @Autowired
-    private InventoryService inventoryService;
+    private final InventoryService inventoryService;
 
     @GetMapping
     public ResponseEntity<List<InventoryInfo>> listAllInventory() {

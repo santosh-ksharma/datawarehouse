@@ -5,12 +5,14 @@ import com.learning.datawarehouse.service.ProductService;
 
 import com.learning.datawarehouse.dto.ProductInfo;
 import com.learning.datawarehouse.util.ProductMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -22,10 +24,10 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/products")
+@RequiredArgsConstructor
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
     @GetMapping
     public ResponseEntity<List<ProductInfo>> fetch() {
@@ -46,13 +48,9 @@ public class ProductController {
     @PostMapping(value="upload")
     //Check if file is empty and throw exception
     public ResponseEntity<Object> upload(@RequestPart("file") MultipartFile file) {
-        try {
+            log.info("Starting to upload product file");
             productService.saveUploadedFile(file);
-        } catch (IOException e) {
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR, "Error while product file. Please retry after sometime.");
-        }
-        return new ResponseEntity<Object>("The file uploaded successfully", HttpStatus.CREATED);
+            return new ResponseEntity<Object>("The file uploaded successfully", HttpStatus.CREATED);
     }
 
 }
