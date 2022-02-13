@@ -25,20 +25,31 @@ jobs:
         uses: 'google-github-actions/auth@v0'
         with:
           credentials_json: '${{ secrets.GCP_SA_KEY }}'
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v0.3.0
+      - name: configure gcloud
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          version: "latest"
+          service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+          project_id: ${{ secrets.GCP_PROJECT_ID_DEV }}
 
       - uses: actions/checkout@master
 
       - name: Configure Docker
         run: |
           gcloud auth configure-docker
+
+      - run: gcloud components install beta
+      - run: gcloud version
       - name: Build
         run: |
           docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID_DEV }}/${{ env.APP_RUN_NAME }}:latest .
+
       - name: Push
         run: |
           docker push gcr.io/${{ secrets.GCP_PROJECT_ID_DEV }}/${{ env.APP_RUN_NAME }}:latest
+
       - name: Deploy
         run: |
           gcloud run deploy ${{ env.APP_RUN_NAME }} \
