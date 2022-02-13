@@ -23,5 +23,7 @@ public class InventoryEntity {
     private String artName;
 
     private int stock;
+
+
 }
 

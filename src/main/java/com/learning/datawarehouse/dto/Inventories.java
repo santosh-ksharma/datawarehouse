@@ -1,4 +1,4 @@
-package com.learning.datawarehouse.upload;
+package com.learning.datawarehouse.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Products {
-    private List<ProductInfo> products;
+public class Inventories {
+    private List<InventoryInfo> inventory;
 
 }

@@ -5,9 +5,12 @@ import com.learning.datawarehouse.model.ArticleEntity;
 import com.learning.datawarehouse.model.ProductEntity;
 import com.learning.datawarehouse.repositories.ArticleRepository;
 import com.learning.datawarehouse.repositories.ProductRepository;
-import com.learning.datawarehouse.upload.ProductInfo;
+import com.learning.datawarehouse.dto.ProductInfo;
 import com.learning.datawarehouse.util.ProductMapper;
-import com.learning.datawarehouse.upload.Products;
+import com.learning.datawarehouse.dto.Products;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,19 +21,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
+@RequiredArgsConstructor
 @Service
 public class ProductService extends GenericService {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
-    @Autowired
-    private ArticleRepository articleRepository;
+    private final ArticleRepository articleRepository;
 
-    @Autowired
-    private InventoryService inventoryService;
+    private final InventoryService inventoryService;
 
     public List<ProductEntity> fetchAllProducts() {
         return productRepository.findAll();

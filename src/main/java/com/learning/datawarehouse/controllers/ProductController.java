@@ -3,9 +3,9 @@ package com.learning.datawarehouse.controllers;
 import com.learning.datawarehouse.model.ProductEntity;
 import com.learning.datawarehouse.service.ProductService;
 
-import com.learning.datawarehouse.upload.ProductInfo;
-import com.learning.datawarehouse.util.InventoryMapper;
+import com.learning.datawarehouse.dto.ProductInfo;
 import com.learning.datawarehouse.util.ProductMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/products")
 public class ProductController {
@@ -27,14 +28,13 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public List<ProductInfo> fetch() {
-        //return productService.fetchAllProducts();
-        return productService.fetchAllProducts().stream().map(productEntity -> ProductMapper.toProductDTO(productEntity)).collect(Collectors.toList());
+    public ResponseEntity<List<ProductInfo>> fetch() {
+        return ResponseEntity.ok().body(productService.fetchAllProducts().stream().map(productEntity -> ProductMapper.toProductDTO(productEntity)).collect(Collectors.toList()));
     }
 
     @GetMapping(value = "{id}")
-    public ProductEntity fetchSingleProduct(@PathVariable Integer id) {
-        return productService.fetchSingleProduct(id);
+    public ResponseEntity<ProductInfo> fetchSingleProduct(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(ProductMapper.toProductDTO(productService.fetchSingleProduct(id)));
     }
 
     @Transactional
@@ -44,6 +44,7 @@ public class ProductController {
     }
 
     @PostMapping(value="upload")
+    //Check if file is empty and throw exception
     public ResponseEntity<Object> upload(@RequestPart("file") MultipartFile file) {
         try {
             productService.saveUploadedFile(file);

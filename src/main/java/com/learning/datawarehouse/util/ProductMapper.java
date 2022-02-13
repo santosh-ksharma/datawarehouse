@@ -2,13 +2,10 @@ package com.learning.datawarehouse.util;
 
 import com.learning.datawarehouse.model.ArticleEntity;
 import com.learning.datawarehouse.model.ProductEntity;
-import com.learning.datawarehouse.upload.ArticleInfo;
-import com.learning.datawarehouse.upload.ProductInfo;
-import org.mapstruct.factory.Mappers;
+import com.learning.datawarehouse.dto.ArticleInfo;
+import com.learning.datawarehouse.dto.ProductInfo;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ProductMapper {
