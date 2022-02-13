@@ -40,10 +40,10 @@ jobs:
         run: |
           docker push gcr.io/${{ secrets.GCP_PROJECT_ID_DEV }}/${{ env.APP_RUN_NAME }}:latest
       - name: Deploy
-          run: |
-            gcloud run deploy ${{ env.APP_RUN_NAME }} \
-            --region ${{ env.APP_RUN_REGION }} \
-            --image gcr.io/${{ secrets.GCP_PROJECT_ID_DEV }}/${{ env.APP_RUN_NAME }} \
-            --platform managed \
-            --allow-unauthenticated \
-            --project ${{ secrets.GCP_PROJECT_ID_DEV }}
+        run: |
+          gcloud run deploy ${{ env.APP_RUN_NAME }} \
+          --region ${{ env.APP_RUN_REGION }} \
+          --image gcr.io/${{ secrets.GCP_PROJECT_ID_DEV }}/${{ env.APP_RUN_NAME }} \
+          --platform managed \
+          --allow-unauthenticated \
+          --project ${{ secrets.GCP_PROJECT_ID_DEV }}
