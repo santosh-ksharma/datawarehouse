@@ -31,8 +31,8 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Configure Docker
-          run: |
-            gcloud auth configure-docker
+        run: |
+          gcloud auth configure-docker
       - name: Build
-          run: |
-            docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID_DEV }}/${{ env.APP_RUN_NAME }}:latest .
+        run: |
+          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID_DEV }}/${{ env.APP_RUN_NAME }}:latest .
