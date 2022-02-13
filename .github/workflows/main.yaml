@@ -14,11 +14,6 @@ jobs:
   build:
     name: Cloud Run Deployment
     runs-on: ubuntu-latest
-    environment:
-      name: dev
-    strategy:
-      matrix:
-        java: [11.0.x]
 
     steps:
       - name: Checkout
