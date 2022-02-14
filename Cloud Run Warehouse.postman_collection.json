@@ -87,30 +87,6 @@
 			"response": []
 		},
 		{
-			"name": "DeleteAll Products",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "https://datawarehouse-2gwxlvwsmq-ew.a.run.app/api/v1/products/",
-					"protocol": "https",
-					"host": [
-						"datawarehouse-2gwxlvwsmq-ew",
-						"a",
-						"run",
-						"app"
-					],
-					"path": [
-						"api",
-						"v1",
-						"products",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Delete Single Product",
 			"request": {
 				"method": "DELETE",
