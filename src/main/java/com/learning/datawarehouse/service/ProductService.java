@@ -6,16 +6,12 @@ import com.learning.datawarehouse.exception.IntegrityViolationException;
 import com.learning.datawarehouse.exception.ProductNotFoundException;
 import com.learning.datawarehouse.model.ArticleEntity;
 import com.learning.datawarehouse.model.ProductEntity;
-import com.learning.datawarehouse.repositories.ArticleRepository;
 import com.learning.datawarehouse.repositories.ProductRepository;
 import com.learning.datawarehouse.dto.ProductInfo;
 import com.learning.datawarehouse.util.ProductMapper;
 import com.learning.datawarehouse.dto.Products;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -33,8 +29,6 @@ import java.util.Optional;
 public class ProductService extends GenericService {
 
     private final ProductRepository productRepository;
-
-    private final ArticleRepository articleRepository;
 
     private final InventoryService inventoryService;
 

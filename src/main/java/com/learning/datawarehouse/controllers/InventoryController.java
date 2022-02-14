@@ -1,21 +1,16 @@
 package com.learning.datawarehouse.controllers;
 
-import com.learning.datawarehouse.dto.ProductInfo;
-import com.learning.datawarehouse.model.InventoryEntity;
 import com.learning.datawarehouse.service.InventoryService;
 import com.learning.datawarehouse.dto.InventoryInfo;
 import com.learning.datawarehouse.util.InventoryMapper;
-import com.learning.datawarehouse.util.ProductMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
-
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
