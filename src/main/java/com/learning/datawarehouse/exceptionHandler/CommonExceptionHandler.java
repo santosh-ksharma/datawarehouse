@@ -41,4 +41,10 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorInfo errorInfo = new ErrorInfo(ex.getMessage(), ex.getErrorCode());
         return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(IntegrityViolationException.class)
+    public final ResponseEntity<ErrorInfo> handleIntegrityViolationException(OutOfStockException ex, HttpServletResponse resp) {
+        ErrorInfo errorInfo = new ErrorInfo(ex.getMessage(), ex.getErrorCode());
+        return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.BAD_REQUEST);
+    }
 }

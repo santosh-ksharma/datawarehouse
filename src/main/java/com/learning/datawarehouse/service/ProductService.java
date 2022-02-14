@@ -2,6 +2,7 @@ package com.learning.datawarehouse.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learning.datawarehouse.exception.FileIncorrectFormatException;
+import com.learning.datawarehouse.exception.IntegrityViolationException;
 import com.learning.datawarehouse.exception.ProductNotFoundException;
 import com.learning.datawarehouse.model.ArticleEntity;
 import com.learning.datawarehouse.model.ProductEntity;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -90,7 +92,15 @@ public class ProductService extends GenericService {
     }
 
     public void save(ProductEntity productEntity){
-        productRepository.save(productEntity);
+        try {
+            productRepository.save(productEntity);
+        }catch(Exception ex){
+            if(ex instanceof DataIntegrityViolationException){
+                log.error("ProductService:save:1006",ex);
+                throw new IntegrityViolationException("One or more product names already exists in database. Please delete such products and upload again","1006");
+            }
+
+        }
     }
 
 }
