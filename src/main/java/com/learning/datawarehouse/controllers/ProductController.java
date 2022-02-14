@@ -31,7 +31,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<ProductInfo>> fetch() {
-        return ResponseEntity.ok().body(productService.fetchAllProducts().stream().map(productEntity -> ProductMapper.toProductDTO(productEntity)).collect(Collectors.toList()));
+        retur stn ResponseEntity.ok().body(productService.fetchAllProducts().stream().map(productEntity -> ProductMapper.toProductDTO(productEntity)).collect(Collectors.toList()));
     }
 
     @GetMapping(value = "{id}")
@@ -43,6 +43,12 @@ public class ProductController {
     @DeleteMapping(value = "{id}")
     public void delete (@PathVariable Integer id) {
         productService.delete(id);
+    }
+
+    @Transactional
+    @DeleteMapping
+    public void delete (){
+        productService.deleteAll();
     }
 
     @PostMapping(value="upload")
