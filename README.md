@@ -26,8 +26,11 @@ As per the requirement, the follow resources are exposed:
   7. Update Inventory
   8. Delete all inventory
   9. Get inventories
+  
+Swagger-ui view : https://datawarehouse-2gwxlvwsmq-ew.a.run.app/swagger-ui/index.html
 
 ##### In the project root path, Cloud Run Warehouse.postman_collection.json file has been provided which is an exported collection having all the above api resources.
+Import the collection and start using the resources.
 
 Please note the for upload of products and inventory resource, upload the products.json and inventory.json file respectively which can also be be found in the project root path (In the body, select form-data, give key as file and select value as file and then upload the file)
 The base path of api resources points to cloud run where the application is deployed.
@@ -56,7 +59,7 @@ Package info in com.learning.datawarehouse:
  
 - In this implementation, the product operations are all inserts. So to update a product, delete a products or all of them and then invoke the product upload again. Here, product name is considered to be unique and so application will return error if same product is again being uploaded that already exists in database.
  
-- The application is integrated with github actions for CI/CD and deployed to cloud run (personal account).
+- The application is integrated with github actions for CI/CD and deployed to cloud run (personal account). The application is deployed in cloud run url : https://datawarehouse-2gwxlvwsmq-ew.a.run.app
  
 - When selling/deleting a product, if any of the article is not having sufficient stock, an exception is returned with status code and an error message.
 
