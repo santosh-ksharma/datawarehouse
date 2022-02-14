@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -47,6 +48,12 @@ public class InventoryController {
     public ResponseEntity<InventoryInfo> updateInventory(@PathVariable int id, @Valid @RequestBody InventoryInfo inventoryInfo) {
         return ResponseEntity.ok().
                 body(inventoryService.updateInventory(id, InventoryMapper.INSTANCE.toInventoryEntity(inventoryInfo)));
+    }
+
+    @Transactional
+    @DeleteMapping
+    public void deleteAll (){
+        inventoryService.deleteAll();
     }
 
     @PostMapping(value="upload")

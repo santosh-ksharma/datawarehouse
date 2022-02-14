@@ -31,7 +31,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<ProductInfo>> fetch() {
-        retur stn ResponseEntity.ok().body(productService.fetchAllProducts().stream().map(productEntity -> ProductMapper.toProductDTO(productEntity)).collect(Collectors.toList()));
+        return ResponseEntity.ok().body(productService.fetchAllProducts().stream().map(productEntity -> ProductMapper.toProductDTO(productEntity)).collect(Collectors.toList()));
     }
 
     @GetMapping(value = "{id}")
@@ -47,7 +47,7 @@ public class ProductController {
 
     @Transactional
     @DeleteMapping
-    public void delete (){
+    public void deleteAll (){
         productService.deleteAll();
     }
 

@@ -100,6 +100,10 @@ public class InventoryService extends GenericService {
         }
     }
 
+    public void deleteAll () {
+        inventoryRepository.deleteAll();
+    }
+
     public void save(InventoryEntity inventoryEntity) {
         inventoryRepository.save(inventoryEntity);
     }
