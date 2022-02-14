@@ -5,7 +5,7 @@
 The assignment is to implement a warehouse software. This software will hold articles, and the articles should contain an identification number, a name and available stock.
 
 
-## Table of Contents (Optional)
+## Table of Contents
 
 If your README is very long, add a table of contents to make it easy for users to find what they need.
 
