@@ -58,7 +58,9 @@ Package info in com.learning.datawarehouse:
  
 - The application is integrated with github actions for CI/CD and deployed to cloud run (personal account).
  
-- While selling/deleting a product, if any of the article is not having sufficient stock, an exception is returned with status code and an error message.
+- When selling/deleting a product, if any of the article is not having sufficient stock, an exception is returned with status code and an error message.
+
+- When selling/deleting a product, if success, the correponding stock amount for an article is reduced in the inventory repository.
  
 - The service account email and json are maintained as github secrets and passed to github action during run.
  
