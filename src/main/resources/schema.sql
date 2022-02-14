@@ -1,7 +1,8 @@
 CREATE TABLE products
 (
     product_id  SERIAL PRIMARY KEY,
-    product_name   varchar   NOT NULL
+    product_name   varchar   NOT NULL,
+    UNIQUE(product_name)
 );
 
 CREATE TABLE articles
