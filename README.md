@@ -52,25 +52,23 @@ Package info in com.learning.datawarehouse:
 - util : Contains mapper utilities that map dto to entity and vice versa.
 
 ## Usage 
- Upload products and inventory to begin and then subsequently invoke any desired operation.
- The product has a generated product id and this has been maintained since generally the consumers (say front end) will pass an id while getting or removing a product.
+- Upload products and inventory to begin and then subsequently invoke any desired operation. The product has a generated product id and this has been maintained since generally the consumers (say front end) will pass an id while getting or removing a product.
  
- In this implementation, the product operations are all inserts. So to update a product, delete a products or all of them and then invoke the product upload again. 
- Here, product name is considered to be unique and so application will return error if same product is again being uploaded that already exists in database.
+- In this implementation, the product operations are all inserts. So to update a product, delete a products or all of them and then invoke the product upload again. Here, product name is considered to be unique and so application will return error if same product is again being uploaded that already exists in database.
  
- The application is integrated with github actions for CI/CD and deployed to cloud run (personal account).
+- The application is integrated with github actions for CI/CD and deployed to cloud run (personal account).
  
- While selling/deleting a product, if any of the article is not having sufficient stock, an exception is returned with status code and an error message.
+- While selling/deleting a product, if any of the article is not having sufficient stock, an exception is returned with status code and an error message.
  
- The service account email and json are maintained as github secrets and passed to github action during run.
+- The service account email and json are maintained as github secrets and passed to github action during run.
  
- Used @ControllerAdvice way of exception handling.
+- Used @ControllerAdvice way of exception handling.
  
- Used slf4j for logs (lombok)
+- Used slf4j for logs (lombok)
  
- Used lombok plugin for clean code
+- Used lombok plugin for clean code
  
- Used in memory H2 Database
+- Used in memory H2 Database
  
 
 
