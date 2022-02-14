@@ -9,9 +9,9 @@ The assignment is to implement a warehouse software. This software will hold art
 
 If your README is very long, add a table of contents to make it easy for users to find what they need.
 
-* [Implementation Details](#Implementation Details)
+* [Implementation](#Implementation)
 * [Usage](#Usage)
-* [Future Enhancements](#Future Enhancements)
+* [Enhancements](#Enhancements)
 * [Tests](#Tests)
 
 ## Implementation Details
