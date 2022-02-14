@@ -10,8 +10,9 @@ The assignment is to implement a warehouse software. This software will hold art
 If your README is very long, add a table of contents to make it easy for users to find what they need.
 
 * [Implementation Details](#Implementation Details)
+* [Usage](#Usage)
 * [Future Enhancements](#Future Enhancements)
-
+* [Tests](#Tests)
 
 ## Implementation Details
 
@@ -31,7 +32,8 @@ Please note the for upload of products and inventory resource, upload the produc
 The base path of api resources points to cloud run where the application is deployed.
 
 Schema.sql defines the database structure.
-SQL structure has been followed here. (It could have been done using NOSql as well). One reason for adopting sql is that the inbound we can embded it with a BI tool to have analytics.
+SQL  has been adopted here since the inbound data is structured . Also, it will be easier to hook up with BI tools to perform analytics as the fields can be marked as dimension or facts based on need.
+(It could have been done using NOSql as well). 
 Fields are available as columns and can be easily extracted in queries.
 
 Initial data has not been imported since the understanding is that the initial load will be done using the upload api resources for products and inventories.
@@ -53,10 +55,10 @@ Package info in com.learning.datawarehouse:
  Upload products and inventory to begin and then subsequently invoke any desired operation.
  The product has a generated product id and this has been maintained since generally the consumers (say front end) will pass an id while getting or removing a product.
  
- In this imnplementation, the product operations are all inserts. So to update a product, delete a products or all of them and then invoke the product upload again. 
+ In this implementation, the product operations are all inserts. So to update a product, delete a products or all of them and then invoke the product upload again. 
  Here, product name is considered to be unique and so application will return error if same product is again being uploaded that already exists in database.
  
- The application is intgetated with github actions for CI/CD and deployed to cloud run (personal account).
+ The application is integrated with github actions for CI/CD and deployed to cloud run (personal account).
  
  While selling/deleting a product, if any of the article is not having sufficient stock, an exception is returned with status code and an error message.
  
@@ -85,12 +87,13 @@ This assignment covers the basic funtionality of warehouse. More features to be 
   9. For production, gcp provides image scan (https://cloud.google.com/container-analysis/docs/container-scanning-overview). We can embed this as well in github action.
   10. Structured logging needs to be implemented (json format) so that searching can be done by fields.
   11. Stackrdiver monitoring or Graphana for monitoring stackdriver metrics.
-  12. Database product and inventory table having created date, last updated date.
+  12. Database product and inventory table having created date, last updated date. More metadata info fields can be added as per need.
   
   
 
 
 ## Tests
-    2 integration test case and 1 unit test has been covered. As part of enhancement
+    2 integration test case and 1 unit test has been covered. This is to establish a template on how further unit test case and integration test case will be developed.
+    As part of enhancement more unit test case and integration test case needs to be implemented.
 
 
