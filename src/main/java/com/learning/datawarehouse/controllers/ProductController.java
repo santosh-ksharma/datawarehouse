@@ -37,12 +37,6 @@ public class ProductController {
         productService.delete(id);
     }
 
-    @Transactional
-    @DeleteMapping
-    public void deleteAll (){
-        productService.deleteAll();
-    }
-
     @PostMapping(value="upload")
     //Check if file is empty and throw exception
     public ResponseEntity<Object> upload(@RequestPart("file") MultipartFile file) {

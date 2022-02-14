@@ -21,12 +21,11 @@ As per the requirement, the follow resources are exposed:
   2. Upload products from a given file
   3. Get a single product
   4. Delete/Sell a product
-  5. Delete all Products
-  6. Upload inventories from a given file
-  7. Update Inventory
-  8. Delete all inventory
-  9. Get inventories
-  10. Get API Spec (yaml format)
+  5. Upload inventories from a given file
+  6. Update Inventory
+  7. Delete all inventory
+  8. Get inventories
+  9. Get API Spec (yaml format)
 
 Cloud Run in GCP has been used to host the application. The minimum number of instance is 0, which means during 1st request, it will take some time as it starts the container.
 This has been done to reduce the cost. In a production setup, we will start with a certain number of minimum instances.
@@ -59,13 +58,13 @@ Package info in com.learning.datawarehouse:
 ## Usage 
 - Upload products and inventory to begin and then subsequently invoke any desired operation. The product has a generated product id and this has been maintained since generally the consumers (say front end) will pass an id while getting or removing a product.
  
-- In this implementation, the product operations are all inserts. So to update a product, delete a products or all of them and then invoke the product upload again. Here, product name is considered to be unique and so application will return error if same product is again being uploaded that already exists in database.
+- In this implementation, the product operations are all inserts. So to update a product, delete the product and then invoke the product upload again with the product to be added. Here, product name is considered to be unique and so application will return error if same product is again being uploaded that already exists in database.
  
 - The application is integrated with github actions for CI/CD and deployed to cloud run (personal account). The application is deployed in cloud run url : https://datawarehouse-2gwxlvwsmq-ew.a.run.app
  
 - When selling/deleting a product, if any of the article is not having sufficient stock, an exception is returned with status code and an error message.
 
-- When selling/deleting a product, if success, the correponding stock amount for an article is reduced in the inventory repository.
+- When selling/deleting a product, if success, the corresponding stock amount for an article is reduced in the inventory repository.
  
 - The service account email and json are maintained as github secrets and passed to github action during run.
  
