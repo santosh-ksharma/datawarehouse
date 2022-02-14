@@ -27,7 +27,7 @@ As per the requirement, the follow resources are exposed:
   8. Delete all inventory
   9. Get inventories
 
-#####In the project root path, Cloud Run Warehouse.postman_collection.json file has been provided which is an exported collection having all the above api resources.
+##### In the project root path, Cloud Run Warehouse.postman_collection.json file has been provided which is an exported collection having all the above api resources.
 
 Please note the for upload of products and inventory resource, upload the products.json and inventory.json file respectively which can also be be found in the project root path (In the body, select form-data, give key as file and select value as file and then upload the file)
 The base path of api resources points to cloud run where the application is deployed.
