@@ -26,8 +26,6 @@ As per the requirement, the follow resources are exposed:
   7. Update Inventory
   8. Delete all inventory
   9. Get inventories
-  
-Swagger-ui view : https://datawarehouse-2gwxlvwsmq-ew.a.run.app/swagger-ui/index.html
 
 Cloud Run in GCP has been used to host the application. The minimum number of instance is 0, which means during 1st request, it will take some time as it starts the container.
 This has been done to reduce the cost. In a production setup, we will start with a certain number of minimum instances.
