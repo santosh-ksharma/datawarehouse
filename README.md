@@ -26,6 +26,7 @@ As per the requirement, the follow resources are exposed:
   7. Update Inventory
   8. Delete all inventory
   9. Get inventories
+  10. Get API Spec (yaml format)
 
 Cloud Run in GCP has been used to host the application. The minimum number of instance is 0, which means during 1st request, it will take some time as it starts the container.
 This has been done to reduce the cost. In a production setup, we will start with a certain number of minimum instances.
